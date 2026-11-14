@@ -1,1 +1,1 @@
-# Ya-z-n-Galaksisi
+# KEREM'S GALAXY
