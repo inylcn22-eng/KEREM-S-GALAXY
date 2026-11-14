@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Avcısı | Tavşan</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #eee5ff, #fff0f5, #e0f5e9);
+            font-family: Arial, sans-serif;
+            color: #49345f;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .kart {
+            background: rgba(255, 255, 255, 0.88);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 25px rgba(80, 60, 130, 0.12);
+            text-align: center;
+        }
+        img {
+            width: 140px;
+            height: 140px;
+            border-radius: 25px;
+            object-fit: cover;
+        }
+        .geri {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #8155a6;
+            font-weight: bold;
+        }
+        .ekle-kutu {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 14px;
+            border: 2px solid #dfd0f5;
+            font-size: 15px;
+        }
+        button {
+            background: #9568bd;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            background: #f8f4ff;
+            padding: 12px 16px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .tamamlandi {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .sil-btn {
+            background: #ff8fa3;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="kart">
+        <a href="index.html" class="geri">← Ana Sayfaya Dön</a><br>
+        <img src="tavsan.png" alt="Tavşan" onerror="this.outerHTML='<div style=\'font-size:80px;\'>🐰</div>'">
+        <h1>🐰 Görev Avcısı</h1>
+        <p>"Hadi çalışalım! Bugünün hedeflerini tek tek avlama zamanı!"</p>
+
+        <div class="ekle-kutu">
+            <input type="text" id="gorevInput" placeholder="Örn: 40 Paragraf + Biyoloji Tekrarı">
+            <button onclick="gorevEkle()">Ekle</button>
+        </div>
+
+        <ul id="gorevListesi"></ul>
+    </div>
+
+    <script>
+        let gorevler = JSON.parse(localStorage.getItem("yagiz_gorevler")) || [
+            { metin: "TYT Matematik 30 Soru Çözümü", tamam: false },
+            { metin: "20 Paragraf Sorusu", tamam: false }
+        ];
+
+        function listeyiCiz() {
+            const ul = document.getElementById("gorevListesi");
+            ul.innerHTML = "";
+            gorevler.forEach((g, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <span class="${g.tamam ? 'tamamlandi' : ''}" onclick="durumDegistir(${index})">
+                        ${g.tamam ? '✅' : '⬜'} ${g.metin}
+                    </span>
+                    <button class="sil-btn" onclick="gorevSil(${index})">Sil</button>
+                `;
+                ul.appendChild(li);
+            });
+            localStorage.setItem("yagiz_gorevler", JSON.stringify(gorevler));
+        }
+
+        function gorevEkle() {
+            const input = document.getElementById("gorevInput");
+            if (input.value.trim() === "") return;
+            gorevler.push({ metin: input.value.trim(), tamam: false });
+            input.value = "";
+            listeyiCiz();
+        }
+
+        function durumDegistir(index) {
+            gorevler[index].tamam = !gorevler[index].tamam;
+            listeyiCiz();
+        }
+
+        function gorevSil(index) {
+            gorevler.splice(index, 1);
+            listeyiCiz();
+        }
+
+        listeyiCiz();
+    </script>
+</body>
+</html>

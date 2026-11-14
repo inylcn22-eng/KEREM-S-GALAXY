@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yağız Kerem | YKS 2027</title>
+
+<style>
+
+/* GENEL SAYFA TASARIMI */
+
+body {
+    background: linear-gradient(
+        135deg,
+        #eee5ff,
+        #fff0f5,
+        #e0f5e9
+    );
+
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #49345f;
+    margin: 0;
+    padding: 30px 15px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* ANA KART */
+
+.kart {
+    background: rgba(255,255,255,0.75);
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 35px 25px;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(80,60,130,0.12);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h1 {
+    color: #8155a6;
+    font-size: 30px;
+}
+
+h2 {
+    color: #65558c;
+}
+
+/* BUTONLAR */
+
+button {
+    background: #9568bd;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #70458f;
+}
+
+/* ESKİ MESAJ KUTUSU */
+
+#mektup {
+    display: none;
+    background: #f5edff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+    line-height: 1.7;
+}
+
+/* MASKOT YERLEŞİMİ */
+
+.karakterler {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 25px;
+    width: 100%;
+    margin: 45px auto 20px;
+}
+
+.karakter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    text-decoration: none;
+    color: #65558c;
+    min-width: 0;
+    padding: 18px 10px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(80,60,130,0.12);
+    transition: transform 0.3s ease;
+}
+
+.karakter:hover {
+    transform: translateY(-8px);
+}
+
+.karakter img {
+    display: block;
+    width: 100%;
+    max-width: 160px;
+    height: 160px;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto;
+}
+
+.karakter p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 45px;
+    margin: 12px 0;
+    color: #65558c;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.karakter span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 115px;
+    height: 38px;
+    margin-top: 5px;
+    background: #e9ddff;
+    color: #7555a8;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* YENİ BÖLÜMLER */
+
+.ek-bolum {
+    background: rgba(255,255,255,0.8);
+    margin: 35px auto;
+    padding: 28px;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(80,60,130,0.12);
+    text-align: center;
+}
+
+.ek-bolum h2 {
+    color: #8155a6;
+}
+
+/* SAYAÇ */
+
+.geri-sayim {
+    background: #e9ddff;
+    color: #7555a8;
+    padding: 18px;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+.ek-bolum input {
+    padding: 12px;
+    border: 2px solid #dfcdeb;
+    border-radius: 12px;
+    margin: 10px;
+    max-width: 90%;
+}
+
+/* KİLİTLİ MEKTUP */
+
+.kilit-kutusu {
+    background: #f5edff;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#ozelMektup {
+    display: none;
+    background: #fff0f5;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 20px;
+    line-height: 1.9;
+    text-align: left;
+    white-space: pre-line;
+}
+
+/* MOTİVASYON GALERİSİ */
+
+.motivasyon-galerisi {
+    margin: 35px auto;
+    padding: 30px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 8px 25px rgba(100,70,150,0.12);
+    text-align: center;
+}
+
+.motivasyon-alt {
+    color: #88749e;
+    margin-bottom: 30px;
+}
+
+.soz-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.bilgelik-karti {
+    background: linear-gradient(
+        135deg,
+        #fff1f8,
+        #f0eaff,
+        #edfff8
+    );
+
+    border: 2px solid #eadcf7;
+    border-radius: 22px;
+    padding: 22px 16px;
+    transition: transform 0.3s,box-shadow 0.3s;
+}
+
+.bilgelik-karti:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 20px rgba(130,90,170,0.18);
+}
+
+.soz-emoji {
+    font-size: 35px;
+}
+
+.bilgelik-karti p {
+    color: #57476e;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.bilgelik-karti h3 {
+    color: #986dbb;
+    font-size: 17px;
+}
+
+.bilgelik-karti span {
+    color: #9889a7;
+    font-size: 13px;
+}
+
+/* ATATÜRK KARTLARI */
+
+.ataturk-karti {
+    background: linear-gradient(
+        135deg,
+        #fff0f3,
+        #f3eaff,
+        #fff5e9
+    );
+
+    border: 2px solid #e8bfd0;
+}
+
+.ataturk-karti h3 {
+    color: #a34f78;
+}
+
+/* YAĞIZ'A ÖZEL MESAJ */
+
+.yagiz-motivasyon {
+    background: linear-gradient(
+        120deg,
+        #e8d9ff,
+        #ffe3ef
+    );
+
+    border-radius: 25px;
+    padding: 25px;
+    margin-top: 30px;
+    color: #62477f;
+    line-height: 1.8;
+}
+
+/* GÜNÜN SÖZÜ */
+
+.gunun-sozu {
+    background: #f4eaff;
+    border-radius: 22px;
+    padding: 22px;
+    margin: 25px 0;
+    text-align: center;
+    color: #745294;
+}
+
+/* TELEFON */
+
+@media(max-width:700px) {
+
+    .karakterler {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 15px;
+    }
+
+    .karakter img {
+        height: 130px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .soz-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .motivasyon-galerisi {
+        padding: 18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="kart">
+
+    <h1>🌌 YAGIZ'S LITTLE GALAXY</h1>
+
+    <h2>Dream big, little doctor! 🩺</h2>
+
+    <h2>💜 Merhaba, Yağız Kerem!</h2>
+
+    <p>
+        2027 yılında hayallerine bir adım daha yaklaşacaksın.
+        Kendine inan ve yoluna devam et!
+    </p>
+
+    <button onclick="mektubuAc()">
+        Sana bir mesajım var 💌
+    </button>
+
+    <div id="mektup"></div>
+
+
+    <!-- MASKOTLAR -->
+
+    <div class="karakterler">
+
+        <a href="tavsan.html" class="karakter">
+
+            <img src="tavsan.png" alt="Tavşan">
+
+            <p>Görev Avcısı 🐰</p>
+
+            <span>Keşfet ✨</span>
+
+        </a>
+
+        <a href="tilki.html" class="karakter">
+
+            <img src="tilki.png" alt="Tilki">
+
+            <p>Yıldız Bekçisi 🦊</p>
+
+            <span>Keşfet ✨</span>
+
+        </a>
+
+        <a href="cizmeli_kedi.html" class="karakter">
+
+            <img src="cizmeli_kedi.png" alt="Çizmeli Kedi">
+
+            <p>Mola Ustası 🐱</p>
+
+            <span>Keşfet ✨</span>
+
+        </a>
+
+        <a href="mojito.html" class="karakter">
+
+            <img src="mojito.png" alt="Mojito">
+
+            <p>Neşe Kaynağı 🍹</p>
+
+            <span>Keşfet ✨</span>
+
+        </a>
+
+    </div>
+
+
+    <!-- GÜNÜN MOTİVASYON SÖZÜ -->
+
+    <div class="gunun-sozu">
+
+        <h2>🌟 Bugünün İlhamı</h2>
+
+        <p id="gununSozu"></p>
+
+        <strong id="gununSahibi"></strong>
+
+    </div>
+
+
+    <!-- ÖZEL MEKTUP -->
+
+    <section class="ek-bolum">
+
+        <h2>💌 Yağız'a Özel Mektup</h2>
+
+        <p>
+            Bu mektup senin için saklandı.
+            Geri sayım tamamlandığında açılacak. 💜
+        </p>
+
+        <div class="geri-sayim" id="yksSayaci">
+            YKS tarihini bekliyoruz...
+        </div>
+
+        <label for="yksTarihi">
+            <strong>YKS sınav tarihi:</strong>
+        </label>
+
+        <br>
+
+        <input type="datetime-local" id="yksTarihi">
+
+        <button onclick="tarihiKaydet()">
+            Tarihi Kaydet 💜
+        </button>
+
+        <div class="kilit-kutusu" id="mektupKilidi">
+
+            <h2>🔒 Sadece Yağız İçin</h2>
+
+            <p>
+                Mektubun açılmasına kalan süreyi bekle...
+            </p>
+
+        </div>
+
+        <div id="ozelMektup"></div>
+
+    </section>
+
+
+    <!-- BİLİM İNSANLARI VE DÜŞÜNÜRLER -->
+
+    <section class="motivasyon-galerisi">
+
+        <h1>🌟 Bilgelerin Yıldızları</h1>
+
+        <p class="motivasyon-alt">
+            Büyük hayaller, cesur zihinlerle başlar.
+            Her gün kendine inan! 💜
+        </p>
+
+        <div class="soz-grid">
+
+
+            <!-- ATATÜRK -->
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">🇹🇷</div>
+
+                <p>
+                    “Hayatta en hakiki mürşit ilimdir.”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>Bilim ve eğitim</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">⭐</div>
+
+                <p>
+                    “Bütün ümidim gençliktedir.”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>Gençlik</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">📚</div>
+
+                <p>
+                    “Gençliği yetiştiriniz. Onlara ilim ve
+                    irfanın müspet fikirlerini veriniz.”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>Eğitim</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">🌍</div>
+
+                <p>
+                    “Yurtta sulh, cihanda sulh.”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>Barış</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">🎨</div>
+
+                <p>
+                    “Sanatsız kalan bir milletin hayat
+                    damarlarından biri kopmuş demektir.”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>Sanat ve kültür</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti ataturk-karti">
+
+                <div class="soz-emoji">❤️</div>
+
+                <p>
+                    “Ne mutlu Türk'üm diyene!”
+                </p>
+
+                <h3>Mustafa Kemal Atatürk</h3>
+
+                <span>10. Yıl Nutku</span>
+
+            </div>
+
+
+            <!-- BİLİM İNSANLARI -->
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🧠</div>
+
+                <p>
+                    “Hayal gücü bilgiden daha önemlidir.”
+                </p>
+
+                <h3>Albert Einstein</h3>
+
+                <span>Fizikçi</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🔬</div>
+
+                <p>
+                    “Hayatta hiçbir şeyden korkmayız;
+                    yalnızca anlaşılması gereken şeyler vardır.”
+                </p>
+
+                <h3>Marie Curie</h3>
+
+                <span>Fizikçi ve kimyager</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">⚡</div>
+
+                <p>
+                    “Şimdiki zaman onların; gelecek ise
+                    gerçekten çalıştığım kişilerin.”
+                </p>
+
+                <h3>Nikola Tesla</h3>
+
+                <span>Mucit ve mühendis</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🌌</div>
+
+                <p>
+                    “Bir yerde, inanılmaz bir şey
+                    keşfedilmeyi bekliyor.”
+                </p>
+
+                <h3>Carl Sagan</h3>
+
+                <span>Astronom</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🍎</div>
+
+                <p>
+                    “Daha uzağı görebildiysem,
+                    devlerin omuzlarında durduğum içindir.”
+                </p>
+
+                <h3>Isaac Newton</h3>
+
+                <span>Fizikçi ve matematikçi</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🎨</div>
+
+                <p>
+                    “Öğrenmek, zihni asla tüketmez.”
+                </p>
+
+                <h3>Leonardo da Vinci'ye atfedilir</h3>
+
+                <span>Sanatçı ve bilim insanı</span>
+
+            </div>
+
+
+            <!-- DÜŞÜNÜRLER -->
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">📖</div>
+
+                <p>
+                    “Sorgulanmamış bir hayat,
+                    yaşanmaya değer değildir.”
+                </p>
+
+                <h3>Sokrates</h3>
+
+                <span>Filozof</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🏛️</div>
+
+                <p>
+                    “Eğitimin kökleri acıdır,
+                    meyvesi tatlıdır.”
+                </p>
+
+                <h3>Aristoteles'e atfedilir</h3>
+
+                <span>Filozof</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">✨</div>
+
+                <p>
+                    “Aklını kullanma cesaretini göster!”
+                </p>
+
+                <h3>Immanuel Kant</h3>
+
+                <span>Filozof</span>
+
+            </div>
+
+
+            <div class="bilgelik-karti">
+
+                <div class="soz-emoji">🌿</div>
+
+                <p>
+                    “Zorluklar zihni güçlendirir.”
+                </p>
+
+                <h3>Seneca'ya atfedilir</h3>
+
+                <span>Filozof</span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- YAĞIZ'A ÖZEL MOTİVASYON -->
+
+        <div class="yagiz-motivasyon">
+
+            ⭐
+
+            <h2>Sevgili Yağız,</h2>
+
+            <p>
+                Belki bugün zorlanıyorsun.
+                Belki yoruldun, belki de bazen
+                kendinden şüphe ediyorsun.
+
+                Ama unutma, gelecekteki doktor Yağız,
+                bugünkü emeklerinin eseri olacak.
+
+                Her çözdüğün soru, her öğrendiğin bilgi
+                seni hayaline biraz daha yaklaştırıyor.
+            </p>
+
+            <h3>
+                Bir gün sen de başkalarına umut olacaksın! 💜
+            </h3>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* ESKİ MOTİVASYON MESAJLARI */
+
+const mesajlar = [
+
+"Bugün yorulmuş olabilirsin ama unutma, bir gün beyaz önlüğünü giydiğinde bugün verdiğin emekleri hatırlayacaksın. 💜",
+
+"Her deneme seni hedefine biraz daha yaklaştırıyor. Kendine haksızlık etme, elinden geleni yapıyorsun! 🌸",
+
+"Belki bugün istediğin neti yapamadın ama bu, yarın yapamayacağın anlamına gelmez. Devam et doktor bey! 🩺",
+
+"Bir gün hastalarının hayatına dokunacaksın. Bugünkü çabanın ne kadar değerli olduğunu o gün anlayacaksın. ✨",
+
+"Kendine inan. Çünkü ben senin hayallerinin peşinden gidebileceğine inanıyorum. 💌"
+
+];
+
+let mesajIndex = 0;
+
+function mektubuAc() {
+
+    const mektup = document.getElementById("mektup");
+
+    mektup.style.display = "block";
+
+    mektup.textContent = mesajlar[mesajIndex];
+
+    mesajIndex++;
+
+    if (mesajIndex >= mesajlar.length) {
+        mesajIndex = 0;
+    }
+
+}
+
+
+/* ÖZEL MEKTUP */
+
+const mektupMetni = `Sevgili Yağız,
+
+Eğer şu an bunu okuyorsan, sınavın bitmiş ve hayaline bir adım daha yaklaşmışsın demektir. Sınavının çok iyi geçtiğine eminim. Bugüne kadar çok çabaladın; istikrarlı ve azimli oldun daima.
+
+Bazen hasta oldun, bazen mutlu, bazen sinirli, bazen de heyecanlıydın. Çok çabaladın, yoruldun ama değdi. Sonucunun çok iyi geleceğinden ve hayırlı olacağından eminim.
+
+Umarım insanlara iyi gelen bir doktor olacaksın. Kendisini mutlu etmiş, hedefine ulaşmış Yağız'ı görmeye sabırsızlanıyorum.
+
+Gerçi belki de yanında olmam ama ne olursa olsun, hayatında olsam da olmasam da umarım mutlu, huzurlu, sağlıklı ve başarmış bir hâlde olursundur.
+
+Seni çoooooooooooooook seviyorum. İyi ki seni tanıdım, iyi ki varsın Doktor Yağız Kerem Tekin Bey. 🥹😄
+
+— En büyük destekçin (sana her şeyden çok inanan fanın),
+İlayda Nur Yalçın`;
+
+
+/* MEKTUBU AÇ */
+
+function mektubuAcOzel() {
+
+    const alan = document.getElementById("ozelMektup");
+
+    alan.textContent = mektupMetni;
+
+    alan.style.display = "block";
+
+    document.getElementById("mektupKilidi").style.display =
+        "none";
+
+    localStorage.setItem("ozelMektupAcildi","true");
+
+}
+
+
+/* TARİHİ KAYDET */
+
+function tarihiKaydet() {
+
+    const tarih =
+        document.getElementById("yksTarihi").value;
+
+    if (!tarih) {
+
+        alert("Önce YKS tarihini seçmelisin!");
+
+        return;
+
+    }
+
+    localStorage.setItem("yksTarihi",tarih);
+
+    sayaciGuncelle();
+
+}
+
+
+/* YKS GERİ SAYIMI */
+
+function sayaciGuncelle() {
+
+    const tarih = localStorage.getItem("yksTarihi");
+
+    const sayac = document.getElementById("yksSayaci");
+
+    if (!tarih) {
+
+        sayac.textContent = "YKS tarihini bekliyoruz 💜";
+
+        return;
+
+    }
+
+    document.getElementById("yksTarihi").value = tarih;
+
+    const fark = new Date(tarih).getTime() - Date.now();
+
+    if (fark <= 0) {
+
+        sayac.textContent =
+            "Hayalin için yeni bir başlangıç! 💜";
+
+        mektubuAcOzel();
+
+        return;
+
+    }
+
+    const gun = Math.floor(
+        fark / (1000 * 60 * 60 * 24)
+    );
+
+    const saat = Math.floor(
+        (fark % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const dakika = Math.floor(
+        (fark % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const saniye = Math.floor(
+        (fark % (1000 * 60)) / 1000
+    );
+
+    sayac.textContent =
+        `${gun} gün ${saat} saat ${dakika} dakika ${saniye} saniye`;
+
+}
+
+
+/* GÜNÜN MOTİVASYON SÖZÜ */
+
+const gunlukSozler = [
+
+    {
+        soz: "Hayal gücü bilgiden daha önemlidir.",
+        kisi: "Albert Einstein"
+    },
+
+    {
+        soz: "Hayatta en hakiki mürşit ilimdir.",
+        kisi: "Mustafa Kemal Atatürk"
+    },
+
+    {
+        soz: "Bütün ümidim gençliktedir.",
+        kisi: "Mustafa Kemal Atatürk"
+    },
+
+    {
+        soz: "Aklını kullanma cesaretini göster!",
+        kisi: "Immanuel Kant"
+    },
+
+    {
+        soz: "Bir yerde, inanılmaz bir şey keşfedilmeyi bekliyor.",
+        kisi: "Carl Sagan"
+    },
+
+    {
+        soz: "Sorgulanmamış bir hayat, yaşanmaya değer değildir.",
+        kisi: "Sokrates"
+    },
+
+    {
+        soz: "Yurtta sulh, cihanda sulh.",
+        kisi: "Mustafa Kemal Atatürk"
+    },
+
+    {
+        soz: "Daha uzağı görebildiysem, devlerin omuzlarında durduğum içindir.",
+        kisi: "Isaac Newton"
+    },
+
+    {
+        soz: "Zorluklar zihni güçlendirir.",
+        kisi: "Seneca'ya atfedilir"
+    },
+
+    {
+        soz: "Ne mutlu Türk'üm diyene!",
+        kisi: "Mustafa Kemal Atatürk"
+    }
+
+];
+
+
+const bugun = new Date();
+
+const gunNo = Math.floor(
+
+    new Date(
+        bugun.getFullYear(),
+        bugun.getMonth(),
+        bugun.getDate()
+    ).getTime() / 86400000
+
+);
+
+const secilenSoz =
+    gunlukSozler[
+        ((gunNo % gunlukSozler.length) +
+        gunlukSozler.length) %
+        gunlukSozler.length
+    ];
+
+document.getElementById("gununSozu").textContent =
+    "“" + secilenSoz.soz + "”";
+
+document.getElementById("gununSahibi").textContent =
+    "— " + secilenSoz.kisi;
+
+
+/* SAYFA AÇILDIĞINDA */
+
+if (
+    localStorage.getItem("ozelMektupAcildi") === "true"
+) {
+
+    mektubuAcOzel();
+
+}
+
+sayaciGuncelle();
+
+setInterval(sayaciGuncelle,1000);
+
+</script>
+
+</body>
+</html>

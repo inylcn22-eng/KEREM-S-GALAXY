@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yıldız Bekçisi | Tilki</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #eee5ff, #fff0f5, #e0f5e9);
+            font-family: Arial, sans-serif;
+            color: #49345f;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .kart {
+            background: rgba(255, 255, 255, 0.88);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 25px rgba(80, 60, 130, 0.12);
+            text-align: center;
+        }
+        img {
+            width: 140px;
+            height: 140px;
+            border-radius: 25px;
+            object-fit: cover;
+        }
+        .geri {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #8155a6;
+            font-weight: bold;
+        }
+        .form-grup {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        input {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px;
+            border-radius: 14px;
+            border: 2px solid #dfd0f5;
+        }
+        button {
+            background: #9568bd;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .net-kart {
+            background: #f8f4ff;
+            padding: 14px 18px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="kart">
+        <a href="index.html" class="geri">← Ana Sayfaya Dön</a><br>
+        <img src="tilki.png" alt="Tilki" onerror="this.outerHTML='<div style=\'font-size:80px;\'>🦊</div>'">
+        <h1>🦊 Yıldız Bekçisi</h1>
+        <p>"Harika! Devam et! Her deneme yıldızlara bir adım daha yaklaştırır."</p>
+
+        <div class="form-grup">
+            <input type="text" id="denemeAdi" placeholder="Deneme Adı (Örn: TYT Genel 1)">
+            <input type="number" step="0.25" id="netSayisi" placeholder="Toplam Net">
+            <button onclick="netEkle()">Kaydet ⭐</button>
+        </div>
+
+        <div id="netListesi"></div>
+    </div>
+
+    <script>
+        let netler = JSON.parse(localStorage.getItem("yagiz_netler")) || [];
+
+        function netleriGoster() {
+            const alan = document.getElementById("netListesi");
+            alan.innerHTML = "";
+            netler.forEach((item, index) => {
+                alan.innerHTML += `
+                    <div class="net-kart">
+                        <span>📊 ${item.ad}</span>
+                        <span style="color:#8155a6;">${item.net} Net</span>
+                        <button style="background:#ff8fa3; padding:6px 10px; font-size:12px;" onclick="netSil(${index})">Sil</button>
+                    </div>
+                `;
+            });
+            localStorage.setItem("yagiz_netler", JSON.stringify(netler));
+        }
+
+        function netEkle() {
+            const ad = document.getElementById("denemeAdi").value.trim();
+            const net = document.getElementById("netSayisi").value;
+            if (!ad || !net) return;
+            netler.unshift({ ad: ad, net: net });
+            document.getElementById("denemeAdi").value = "";
+            document.getElementById("netSayisi").value = "";
+            netleriGoster();
+        }
+
+        function netSil(index) {
+            netler.splice(index, 1);
+            netleriGoster();
+        }
+
+        netleriGoster();
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Özel Zaman Kapsülü | Yağız Kerem</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #eee5ff, #fff0f5, #e0f5e9);
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #49345f;
+            margin: 0;
+            padding: 30px 15px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .kart {
+            background: rgba(255, 255, 255, 0.92);
+            width: 100%;
+            max-width: 750px;
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(80, 60, 130, 0.15);
+            text-align: center;
+        }
+
+        .geri-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #8155a6;
+            font-weight: bold;
+            background: #f3ebff;
+            padding: 10px 18px;
+            border-radius: 14px;
+        }
+
+        .kilit-ikon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        .kalan-sure {
+            font-size: 20px;
+            font-weight: bold;
+            color: #9568bd;
+            background: #f8f3ff;
+            padding: 15px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        #mektup-icerik {
+            display: none;
+            text-align: left;
+            background: #fdfaff;
+            padding: 30px;
+            border-radius: 22px;
+            border: 2px solid #e5d4ff;
+            line-height: 1.85;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+
+        .imza {
+            margin-top: 25px;
+            font-weight: bold;
+            color: #8155a6;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kart">
+        <a href="index.html" class="geri-btn">← Ana Sayfaya Dön</a>
+
+        <div id="kilitli-alan">
+            <div class="kilit-ikon">🔒</div>
+            <h1>Bu Mektup Henüz Kilitli!</h1>
+            <p>Sevgili Yağız Kerem, bu mektup sadece YKS 2027 sınavından çıktığın an okuman için mühürlendi.</p>
+            <div class="kalan-sure" id="kilit-sayac">Hesaplanıyor...</div>
+            <p style="font-size: 14px; color: #7a6896;">Sabret doktor bey, o büyük gün geldiğinde burası senin için açılacak. 💜</p>
+        </div>
+
+        <div id="mektup-icerik">
+            <h2 style="color:#8155a6; text-align:center; margin-top:0;">🎉 Tebrikler Doktor Bey! 🩺</h2>
+            <p><strong>Sevgili Yağız,</strong></p>
+            <p>
+                Eğer şu an bunu okuyorsan sınavın bitmiş ve hayaline bir adım daha yaklaşmışsın demektir. Sınavının çok iyi geçtiğine eminim; bugüne kadar çok çabaladın, istikrarlı ve azimli oldun daima. Bazen hasta oldun, bazen sinirli, bazen de çok mutluydun. Çok çabaladın, yoruldun ama değdi.
+            </p>
+            <p>
+                Sonucunun çok iyi geleceğinden ve sana hayır getireceğinden eminim. Umarım insanlara iyi gelen bir doktor olacaksın. Kendisini mutlu etmiş, hedefine ulaşmış Yağız'ı görmeye sabırsızlanıyorum.
+            </p>
+            <p>
+                Gerçi belki de yanında olmam ama ne olursa olsun, hayatında olsam da olmasam da umarım mutlu, huzurlu, sağlıklı ve başarmış bir haldesindir.
+            </p>
+            <p>
+                Seni çoooooooooooooook seviyorum. İyi ki seni tanıdım, iyi ki varsın Doktor Yağız Kerem Tekin Bey! 🥹😄
+            </p>
+            <div class="imza">
+                - En büyük destekçin (sana her şeyden çok inanan fanın)<br>
+                İlayda Nur Yalçın 💜
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const kilitAcilisTarihi = new Date("2027-06-20T13:00:00").getTime();
+
+        function kilidiKontrolEt() {
+            const simdi = new Date().getTime();
+            const fark = kilitAcilisTarihi - simdi;
+
+            if (fark <= 0) {
+                document.getElementById("kilitli-alan").style.display = "none";
+                document.getElementById("mektup-icerik").style.display = "block";
+            } else {
+                const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+                const saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+                const saniye = Math.floor((fark % (1000 * 60)) / 1000);
+
+                document.getElementById("kilit-sayac").innerText = 
+                    `Açılmasına: ${gun} Gün, ${saat} Saat, ${dakika} Dakika, ${saniye} Saniye kaldı`;
+            }
+        }
+
+        setInterval(kilidiKontrolEt, 1000);
+        kilidiKontrolEt();
+    </script>
+
+</body>
+</html>
